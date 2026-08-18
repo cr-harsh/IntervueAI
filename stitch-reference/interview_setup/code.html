@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IntervueAI - Interview Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#424754",
+                        "surface-container-high": "#2a2a2b",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-tertiary-container": "#461f00",
+                        "inverse-on-surface": "#313031",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "secondary-container": "#571bc1",
+                        "secondary": "#d0bcff",
+                        "on-secondary-fixed": "#23005c",
+                        "primary": "#adc6ff",
+                        "surface-container-highest": "#353436",
+                        "surface-tint": "#adc6ff",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "inverse-primary": "#005ac2",
+                        "primary-fixed-dim": "#adc6ff",
+                        "background": "#131314",
+                        "tertiary": "#ffb786",
+                        "on-secondary-container": "#c4abff",
+                        "on-surface-variant": "#c2c6d6",
+                        "surface-bright": "#3a393a",
+                        "on-tertiary": "#502400",
+                        "on-background": "#e5e2e3",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-variant": "#353436",
+                        "surface-dim": "#131314",
+                        "outline": "#8c909f",
+                        "primary-container": "#4d8eff",
+                        "on-secondary": "#3c0091",
+                        "surface-container-low": "#1c1b1c",
+                        "on-primary-fixed": "#001a42",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface": "#131314",
+                        "on-primary-fixed-variant": "#004395",
+                        "tertiary-container": "#df7412",
+                        "on-primary": "#002e6a",
+                        "surface-container": "#201f20",
+                        "primary-fixed": "#d8e2ff",
+                        "inverse-surface": "#e5e2e3",
+                        "on-tertiary-fixed": "#311400",
+                        "on-surface": "#e5e2e3",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-container": "#00285d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-xl": ["Geist"],
+                        "headline-xl-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background-color: rgba(18, 18, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .glow-border-active {
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 15px rgba(77, 142, 255, 0.15);
+        }
+        .segmented-control-btn {
+            @apply px-4 py-2 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-low border border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer;
+        }
+        .segmented-control-btn.active {
+            @apply bg-primary-container text-on-primary-container border-primary;
+        }
+        .segmented-control-btn:first-child {
+            @apply rounded-l-md border-r-0;
+        }
+        .segmented-control-btn:last-child {
+            @apply rounded-r-md border-l-0;
+        }
+        .segmented-control-btn:not(:first-child):not(:last-child) {
+            @apply border-x-0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar -->
+<nav class="bg-background/80 backdrop-blur-md fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop py-stack-md max-w-container-max mx-auto border-b border-outline-variant flat no shadows">
+<div class="font-headline-md text-headline-md font-bold text-primary">IntervueAI</div>
+<div class="hidden md:flex gap-8">
+<span class="text-primary font-bold border-b-2 border-primary pb-1">01 Setup</span>
+<span class="text-on-surface-variant font-body-md">02 Questions</span>
+<span class="text-on-surface-variant font-body-md">03 Interview</span>
+<span class="text-on-surface-variant font-body-md">04 Results</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" data-icon="account_circle">account_circle</span>
+<button class="bg-primary text-on-primary font-label-md px-4 py-2 rounded font-bold hover:opacity-80 transition-opacity">Try Pro</button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 w-full max-w-[1000px] mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-stack-lg flex flex-col gap-stack-lg">
+<!-- Header -->
+<header class="text-center flex flex-col gap-stack-sm mb-8">
+<h1 class="font-headline-lg text-headline-lg text-on-background">Create Your Interview</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Tell us about the role you're preparing for and we'll create a personalized interview.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Resume Section -->
+<section class="glass-panel rounded-xl p-stack-md flex flex-col gap-stack-sm">
+<h2 class="font-headline-md text-headline-md text-on-background">Your Resume</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Upload your resume so IntervueAI can personalize questions around your experience.</p>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-colors cursor-pointer mb-4">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="upload_file">upload_file</span>
+<p class="font-label-md text-label-md text-on-background mb-1">Drag and drop area</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">or</p>
+<button class="px-4 py-2 border border-outline-variant rounded text-label-sm font-label-sm hover:bg-surface-variant transition-colors">Browse Files</button>
+</div>
+<!-- Sample Uploaded File -->
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="picture_as_pdf">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-background">resume_final.pdf</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[10px]">1.2MB • Uploaded</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-error cursor-pointer text-sm" data-icon="close">close</span>
+</div>
+</section>
+<!-- Job Description Section -->
+<section class="glass-panel rounded-xl p-stack-md flex flex-col gap-stack-sm">
+<h2 class="font-headline-md text-headline-md text-on-background">Target Job Description</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Paste the job description for the role you're preparing for.</p>
+<textarea class="w-full h-32 bg-surface-container-lowest border border-outline-variant rounded p-3 font-body-sm text-body-sm text-on-background placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none mb-4" placeholder="Paste job description here..."></textarea>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Job posting URL (Optional)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-2 font-body-sm text-body-sm text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="https://..." type="text"/>
+</div>
+</section>
+</div>
+<!-- Interview Domain -->
+<section class="glass-panel rounded-xl p-stack-md flex flex-col gap-stack-sm">
+<h2 class="font-headline-md text-headline-md text-on-background mb-2">Choose Your Interview Domain</h2>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center gap-2 hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant" data-icon="layers">layers</span>
+<span class="font-label-sm text-label-sm text-on-background">Full Stack</span>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center gap-2 hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant" data-icon="web">web</span>
+<span class="font-label-sm text-label-sm text-on-background">Frontend</span>
+</div>
+<div class="bg-surface-container-low border glow-border-active rounded-lg p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer bg-primary-container/10">
+<span class="material-symbols-outlined text-2xl text-primary" data-icon="dns">dns</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">Backend</span>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center gap-2 hover:border-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant" data-icon="psychology">psychology</span>
+<span class="font-label-sm text-label-sm text-on-background">AI/ML</span>
+</div>
+</div>
+</section>
+<!-- Interview Preferences -->
+<section class="glass-panel rounded-xl p-stack-md flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-headline-md text-on-background">Interview Preferences</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Experience Level -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Experience Level</label>
+<div class="flex w-full">
+<button class="segmented-control-btn flex-1">Beginner</button>
+<button class="segmented-control-btn active flex-1">Intermediate</button>
+<button class="segmented-control-btn flex-1">Advanced</button>
+</div>
+</div>
+<!-- Interview Type -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Interview Type</label>
+<div class="flex w-full">
+<button class="segmented-control-btn active flex-1">Technical</button>
+<button class="segmented-control-btn flex-1">Behavioral</button>
+<button class="segmented-control-btn flex-1">Mixed</button>
+</div>
+</div>
+<!-- Difficulty -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Difficulty</label>
+<div class="flex w-full">
+<button class="segmented-control-btn flex-1">Easy</button>
+<button class="segmented-control-btn active flex-1">Medium</button>
+<button class="segmented-control-btn flex-1">Hard</button>
+<button class="segmented-control-btn flex-1">Adaptive</button>
+</div>
+</div>
+<!-- Number of Questions -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Number of Questions</label>
+<div class="flex w-full">
+<button class="segmented-control-btn flex-1">5</button>
+<button class="segmented-control-btn active flex-1">10</button>
+<button class="segmented-control-btn flex-1">15</button>
+<button class="segmented-control-btn flex-1">20</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Action -->
+<section class="flex flex-col items-center justify-center mt-8 gap-4 text-center">
+<button class="bg-[#3b82f6] text-white font-label-md px-8 py-4 rounded-lg font-bold hover:bg-[#2563eb] transition-colors text-lg flex items-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                Generate My Interview <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">IntervueAI will analyze your resume and job description to generate personalized interview questions.</p>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg border-t border-outline-variant flat no shadows bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto mt-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-4 md:mb-0">IntervueAI</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left mb-4 md:mb-0">© 2024 IntervueAI. Optimized for high-performance engineers.</p>
+<div class="flex gap-4">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">API Docs</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</footer>
+<script>
+        // Simple script to handle segmented control selection visually
+        document.querySelectorAll('.flex.w-full').forEach(group => {
+            const buttons = group.querySelectorAll('.segmented-control-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body></html>
