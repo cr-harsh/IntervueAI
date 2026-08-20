@@ -1,20 +1,3 @@
-import type { InterviewConfig, Question, Result } from '../types'
-export const defaultConfig: InterviewConfig = { domain: 'Backend', level: 'Intermediate', type: 'Technical', difficulty: 'Adaptive', questionCount: 10, jobDescription: '', jobUrl: '', resumeName: '' }
-const bank: Question[] = [
-  { id: 'q1', kind: 'Technical', difficulty: 'Medium', text: 'Explain how you would design authentication and authorization for a scalable MERN application.', tags: ['React', 'Node.js', 'Authentication'], hint: 'Discuss JWTs versus sessions, token storage, roles, refresh tokens, and horizontal scaling.' },
-  { id: 'q2', kind: 'Technical', difficulty: 'Hard', text: 'How would you design a REST API that can efficiently handle a large number of concurrent requests?', tags: ['Node.js', 'Express', 'System Design'], hint: 'Consider rate limiting, caching, load balancing, data access, and observability.' },
-  { id: 'q3', kind: 'Problem Solving', difficulty: 'Medium', text: 'Your API response time has suddenly increased in production. Walk through how you would investigate and resolve the issue.', tags: ['Debugging', 'Backend', 'Performance'], hint: 'Make the investigation measurable: metrics, tracing, hypotheses, and rollback strategy.' },
-  { id: 'q4', kind: 'Behavioral', difficulty: 'Medium', text: 'Tell me about a challenging technical problem you faced and how you approached solving it.', tags: ['Communication', 'Problem Solving'], hint: 'Use a concise situation, action, result structure with concrete trade-offs.' },
-  { id: 'q5', kind: 'Technical', difficulty: 'Medium', text: 'Explain the Node.js event loop and how it handles asynchronous operations.', tags: ['Node.js', 'Async', 'Architecture'], hint: 'Cover call stack, queues, microtasks, I/O phases, and practical consequences.' },
-  { id: 'q6', kind: 'Problem Solving', difficulty: 'Hard', text: 'Describe how you would implement a real-time collaborative code editor using WebSockets.', tags: ['WebSockets', 'React', 'Concurrency'], hint: 'Address presence, conflict resolution, persistence, reconnecting, and scaling.' },
-  { id: 'q7', kind: 'Technical', difficulty: 'Medium', text: 'What database indexes would you choose for a high-traffic product search experience?', tags: ['Databases', 'Performance'], hint: 'Explain how query patterns determine index choice and trade-offs.' },
-  { id: 'q8', kind: 'Behavioral', difficulty: 'Easy', text: 'How do you communicate a technical risk to a non-technical stakeholder?', tags: ['Communication'], hint: 'Balance clarity, options, impact, and a recommendation.' },
-  { id: 'q9', kind: 'Technical', difficulty: 'Hard', text: 'Design a safe deployment strategy for a service used by millions of people.', tags: ['DevOps', 'Reliability'], hint: 'Discuss rollout, feature flags, observability, rollback, and data migrations.' },
-  { id: 'q10', kind: 'Technical', difficulty: 'Medium', text: 'How would you secure sensitive user data across a modern web application?', tags: ['Security', 'Architecture'], hint: 'Cover transport, encryption, secrets, authorization, audits, and incident response.' },
-]
-export const createQuestions = (config: InterviewConfig) => Array.from({ length: config.questionCount }, (_, index) => {
-  const source = bank[index % bank.length]
-  const round = Math.floor(index / bank.length)
-  return round === 0 ? source : { ...source, id: `q${index + 1}`, text: `${source.text} (practice variation ${round + 1})` }
-})
+import type { InterviewConfig, Result } from '../types'
+export const defaultConfig: InterviewConfig = { domain: 'Backend', level: 'Intermediate', type: 'Technical', difficulty: 'Adaptive', questionCount: 10, jobDescription: '', jobUrl: '', resumeName: '', resumeText: '' }
 export const createResults = (): Result => ({ score: 82, technical: 86, communication: 84, problemSolving: 79, depth: 78, strengths: ['React and frontend architecture', 'REST API design', 'Technical communication', 'Structured debugging approach'], focusAreas: ['System design depth', 'Authentication security', 'Database optimization', 'Distributed systems'], insight: "You showed strong full-stack fundamentals and a thoughtful debugging process. For your next interview, add more specificity around security boundaries, data trade-offs, and distributed-system failure modes." })

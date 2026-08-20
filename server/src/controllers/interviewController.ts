@@ -19,12 +19,22 @@ export async function generateQuestions(req: Request, res: Response) {
   const interviewId = String(req.params.id); validateId(interviewId)
   const interview = await Interview.findById(interviewId)
   if (!interview) throw new AppError(404, 'Interview not found')
+  console.info('[interview] generating questions', { interviewId, domain: interview.domain, questionCount: interview.questionCount, resumeChars: interview.resume.length, jobDescriptionChars: interview.jobDescription.length })
+  const previousStatus = interview.status
   interview.status = 'generating'; await interview.save()
-  const generated = await aiClient.generate({ resume: interview.resume, jobDescription: interview.jobDescription, domain: interview.domain, experienceLevel: interview.experienceLevel, difficulty: interview.difficulty, questionCount: interview.questionCount })
-  if (!Array.isArray(generated.questions) || generated.questions.length === 0) throw new AppError(502, 'AI service returned no questions')
-  interview.questions.splice(0, interview.questions.length, ...generated.questions.map(question => ({ ...question, answer: '', evaluation: null, score: null })))
-  interview.status = 'ready'; await interview.save()
-  res.json({ questions: interview.questions, status: interview.status })
+  try {
+    const generated = await aiClient.generate({ resume: interview.resume, jobDescription: interview.jobDescription, domain: interview.domain, experienceLevel: interview.experienceLevel, difficulty: interview.difficulty, questionCount: interview.questionCount })
+    if (!Array.isArray(generated.questions) || generated.questions.length === 0) throw new AppError(502, 'AI service returned no questions')
+    interview.questions.splice(0, interview.questions.length, ...generated.questions.map(question => ({ ...question, answer: '', evaluation: null, score: null })))
+    interview.status = 'ready'; await interview.save()
+    console.info('[interview] questions generated', { interviewId, questionCount: generated.questions.length })
+    res.json({ questions: interview.questions, status: interview.status })
+  } catch (error) {
+    interview.status = previousStatus === 'generating' ? 'draft' : (previousStatus || 'draft')
+    await interview.save()
+    console.error('[interview] question generation failed', { interviewId, error: error instanceof Error ? error.message : 'unknown error' })
+    throw error
+  }
 }
 export async function submitAnswer(req: Request, res: Response) {
   const interviewId = String(req.params.id); const questionId = String(req.params.questionId); validateId(interviewId); validateId(questionId); validateAnswer(req.body)
