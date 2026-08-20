@@ -1,6 +1,6 @@
 import type { InterviewConfig, Question, Evaluation, Result } from '../types'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:4000/api'
+const API_BASE = import.meta.env.VITE_API_URL
 
 export interface BackendQuestion {
   _id: string
